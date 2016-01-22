@@ -19,6 +19,11 @@ puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 
+puts "#{Post.count}"
+Post.find_or_create_by(title: random_sentence, body: random_paragraph)
+Comment.find_or_create_by(body: random_paragraph)
+puts "#{Post.count}"
+
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
