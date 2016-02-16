@@ -16,7 +16,11 @@
       </div>
       <div class='form-group'>
         <%= ad.label :body %>
-        <%= ad.text_area :body, rows: 4, class: 'form-control', placeholder: "Enter advertisement body" %>
+        <%= ad.text_area :copy, rows: 4, class: 'form-control', placeholder: "Enter advertisement copy" %>
+      </div>
+      <div class='form-group'>
+        <%= ad.label :price %>
+        <%= ad.number_field :price, class: 'form-control', placeholder: "Enter advertisement price" %>
       </div>
       <div class='form-group'>
         <%= ad.submit "Submit Ad", class: 'btn btn-success' %>
