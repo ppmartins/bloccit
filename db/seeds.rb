@@ -1,5 +1,23 @@
 require "random_data"
 
+
+5.times do
+   User.create!(
+   name:     RandomData.random_name,
+   email:    RandomData.random_email,
+   password: RandomData.random_sentence
+   )
+end
+users = User.all
+
+
+user = User.first
+user.update_attributes!(
+  email: 'ppereiramartins@gmail.com',
+  password: 'helloworld'
+)
+
+
 15.times do
   Topic.create!(
     name:         RandomData.random_sentence,
@@ -26,21 +44,6 @@ posts = Post.all
   )
 end
 
-
-5.times do
-  User.create!(
-   name:     RandomData.random_name,
-   email:    RandomData.random_email,
-   password: RandomData.random_sentence
-   )
- end
- users = User.all
-
-user = User.first
-user.update_attributes!(
-  email: "ppereiramartins@gmail.com",
-  password: "helloworld"
-)
 
 
 puts "Seed finished"
