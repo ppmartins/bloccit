@@ -13,10 +13,18 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
     end
 
     it "GET show returns http success" do
-      get :show, post_id: my_post.id, id: my_comment.id
+      get :show, id: my_comment.id
       expect(response).to have_http_status(:success)
     end
+
+    it "GET show returns a comment" do
+      get :show, id: my_comment.id
+      response_hash = JSON.parse response.body
+      expect(response_hash['id']).to eq my_comment.id
+      expect(response_hash['body']).to eq my_comment.body
+    end
   end
+
 
   context "unauthorized user" do
     before do
@@ -29,8 +37,15 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
     end
 
     it "GET show returns http success" do
-      get :show, post_id: my_post.id, id: my_comment.id
+      get :show, id: my_comment.id
       expect(response).to have_http_status(:success)
+    end
+
+    it "GET show returns a comment" do
+      get :show, id: my_comment.id
+      response_hash = JSON.parse response.body
+      expect(response_hash['id']).to eq my_comment.id
+      expect(response_hash['body']).to eq my_comment.body
     end
   end
 end
