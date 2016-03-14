@@ -20,6 +20,7 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   def create
     post = Post.new(post_params)
+    post.topic = Topic.find(params[:topic_id])
 
     if post.valid?
       post.save!
@@ -43,6 +44,6 @@ class Api::V1::PostsController < Api::V1::BaseController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :topic_id, :user_id)
   end
 end
