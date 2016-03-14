@@ -7,6 +7,8 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
 
   context "unauthenticated user" do
     it "PUT update returns http unauthenticated" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
       put :update, topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body}
       expect(response).to have_http_status(401)
     end
@@ -29,6 +31,8 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
     end
 
     it "PUT update returns http unauthenticated" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
       put :update, topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body}
       expect(response).to have_http_status(401)
     end
@@ -53,7 +57,7 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
     end
 
     describe "PUT update" do
-      before { put :update, topic_id: my_topic.id, id: my_post.id, post: {name: @new_post.name, description: @new_post.description} }
+      before { put :update, topic_id: my_topic.id, id: my_post.id, post: {title: @new_post.title, description: @new_post.body} }
 
       it "returns http success" do
         expect(response).to have_http_status(:success)
@@ -70,7 +74,7 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
     end
 
     describe "POST create" do
-      before { post :create, topic_id: my_topic.id, post: {name: @new_post.name, description: @new_post.description} }
+      before { post :create, topic_id: my_topic.id, post: {title: @new_post.title, description: @new_post.body} }
 
       it "returns http success" do
         expect(response).to have_http_status(:success)
@@ -82,8 +86,8 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
 
       it "creates a post with the correct attributes" do
         hashed_json = JSON.parse(response.body)
-        expect(hashed_json["name"]).to eq(@new_post.name)
-        expect(hashed_json["description"]).to eq(@new_post.description)
+        expect(hashed_json["title"]).to eq(@new_post.title)
+        expect(hashed_json["body"]).to eq(@new_post.body)
       end
     end
 
